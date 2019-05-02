@@ -1,0 +1,69 @@
+<form #coinForm="ngForm" (ngSubmit)="onSubmit(coinForm)">
+  <input
+    type="hidden"
+    name="_id"
+    #_id="ngModel"
+    [(ngModel)]="coinService.selectedCoin._id"
+  />
+  Name:
+  <input
+    type="text"
+    name="name"
+    #name="ngModel"
+    [(ngModel)]="coinService.selectedCoin.name"
+    placeholder="Name"
+    required
+  />
+  Code:
+  <input
+    type="text"
+    name="code"
+    #name="ngModel"
+    [(ngModel)]="coinService.selectedCoin.code"
+    required
+  />
+  Supply:
+  <input
+    type="text"
+    name="supply"
+    #name="ngModel"
+    [(ngModel)]="coinService.selectedCoin.supply"
+    required
+  />
+  Todays Price:
+  <input
+    type="text"
+    name="price"
+    #name="ngModel"
+    [(ngModel)]="coinService.selectedCoin.price"
+    required
+  />
+  <input type="submit" [disabled]="!coinForm.valid" />
+
+  <table class="responsive-table highlight">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Code</th>
+        <th>Supply</th>
+        <th>Price</th>
+      </tr>
+    </thead>
+    <tr *ngFor="let coin of coinService.coins">
+      <td>{{ coin.name }}</td>
+      <td>{{ coin.code }}</td>
+      <td>{{ coin.supply }}</td>
+      <td>{{ coin.price }}</td>
+      <td>
+        <a class="action-btn" (click)="editCoin(coin)">
+          <i class="material-icons">edit</i>
+        </a>
+      </td>
+      <td>
+        <a class="action-btn" (click)="delCoin(coin)">
+          <i class="material-icons">delete</i>
+        </a>
+      </td>
+    </tr>
+  </table>
+</form>
